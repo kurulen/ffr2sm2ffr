@@ -1,2 +1,2 @@
 # ffr2sm2ffr
-Scroll speed calculator, forked from cmodcalc.com online.
+https://kurulen.github.io/ffr2sm2ffr
