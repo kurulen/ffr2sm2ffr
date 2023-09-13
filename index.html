@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>FFR2SM2FFR</title>
+      <script>
+         function calculateCMOD(checkBox){
+             let userSs = document.getElementById("ss").value
+         	let root = 1 / 310
+             let userCmod = userSs * 310
+         	if (checkBox = document.getElementById("toFiffer").checked == true){
+         		userCmod = root * userSs
+         	}
+         	if (checkBox = document.getElementById("toFiffer").checked == true) {
+             	document.getElementById("cmodDiv").innerHTML = "Your FFR scroll speed is " + userCmod.toPrecision(7)
+         	} else {
+         		document.getElementById("cmodDiv").innerHTML = "Your StepMania CMOD is " + Math.floor(userCmod)
+         	}
+         }
+         window.addEventListener('load', function () {
+         	var rand = Math.floor(Math.random() * 10)
+         	if(rand <5){
+         		document.getElementById("randomTitle").innerHTML = "<h3>FFR<small>2</small>SM</h3>"
+         	} else {
+         		document.getElementById("randomTitle").innerHTML = "<h3>SM<small>2</small>FFR</h3>"
+         	}
+         })
+      </script>
+      <style>
+         form{
+         margin-left:auto;
+         margin-right:auto;
+         }
+         body {
+         text-align: center;
+         font-family: 'ABeeZee', sans-serif;
+         align-content:center;
+         background-color: #FDFFFD;
+         }
+         table {
+         margin-left: auto;
+         margin-right: auto;
+         }
+         h3 {
+         font-size: 200%;
+         }
+      </style>
+   </head>
+   <body cz-shortcut-listen="true">
+      <div id="randomTitle"></div>
+      <p>
+         <strong>Forked</strong> from <a href="https://cmodcalc.com">the original CMOD-calculator</a> by br1mst0ne.
+         </br>
+         <small>The original tool was created by Laamis, with help from Jole and Kangalioo.</small>
+      </p>
+      <form>
+         <label>Scroll speed: </label>
+         <input type="text" name="bet" id="ss" size="8"> 
+         <input type="button" id="submit" value="Calculate" onclick="calculateCMOD()">
+         <br/>
+      </form>
+      Convert from StepMania to FFR: <input type="checkbox" id="toFiffer">
+      <br>
+      <div id="cmodDiv"></div>
+      <br>
+   </body>
+</html>
