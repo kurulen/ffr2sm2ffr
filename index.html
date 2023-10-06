@@ -31,7 +31,7 @@
             let readahead = 3.1
             let realCmod = userSs * 310
             // evil readahead / stepmania window accounting hack
-            let userCmod = capWideScale(((realCmod / (userSz / 3.1 / userSs)) / calcFifferSpeed(userSs))) * (carry=="1" ? 1 : carry+"."+userRs)
+            let userCmod = capWideScale(((realCmod / (userSz / 3.1 / userSs)) / calcFifferSpeed(userSs))) / (carry=="1" ? 1 : carry+"."+userRs)
          	if (checkBox = document.getElementById("toFiffer").checked == true){
          		userCmod = calcFifferSpeed((userSs+".5"))
          	}
