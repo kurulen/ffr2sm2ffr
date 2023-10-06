@@ -49,18 +49,32 @@
             }
          }
          function removeSize(){
+               if(title(0,true) == 1) {
+                  title(2,false)
+               }else {
+                  title(1,false)
+               }
                toggleHide(document.getElementById("szLabel"))
                toggleHide(document.getElementById("sz"))
                toggleHide(document.getElementById("rsLabel"))
                toggleHide(document.getElementById("rs"))
          }
+         function title(num, get){
+            if(num == 1) {
+               document.getElementById("title").innerHTML = "<h3>FFR<small>2</small>SM</h3>"
+            }else if(num == 2){
+               document.getElementById("title").innerHTML = "<h3>SM<small>2</small>FFR</h3>"
+            }
+            if(get == true) {
+               if(document.getElementById("title").innerHTML == "<h3>FFR<small>2</small>SM</h3>") {
+                  return 1
+               }else{
+                  return 2
+               }
+            }
+         }
          window.addEventListener('load', function () {
-         	var rand = Math.floor(Math.random() * 10)
-         	if(rand <5){
-         		document.getElementById("randomTitle").innerHTML = "<h3>FFR<small>2</small>SM</h3>"
-         	} else {
-         		document.getElementById("randomTitle").innerHTML = "<h3>SM<small>2</small>FFR</h3>"
-         	}
+            document.getElementById("title").innerHTML = "<h3>FFR<small>2</small>SM</h3>"
          })
       </script>
       <style>
@@ -84,7 +98,7 @@
       </style>
    </head>
    <body cz-shortcut-listen="true">
-      <div id="randomTitle"></div>
+      <div id="title"></div>
       <p>
          <strong>Forked</strong> from <a href="https://cmodcalc.com">the original CMOD-calculator</a> by br1mst0ne.
          </br>
