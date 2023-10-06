@@ -14,18 +14,31 @@
          function calculateCMOD(checkBox){
             let userSs = document.getElementById("ss").value
             let userSz = document.getElementById("sz").value
+            let userRs = document.getElementById("rs").value
+            let warn = ""
+            let carry = ""
+            if(userRs == null || userRs == "") {
+               warn = "<strong>Zoom not entered. Assuming 100%...</strong><br/>"
+               userRs = "100"
+            } else if(userRs.includes("%") || userRs.includes(".")) {
+               warn = "<strong>Do not include a % or . in your zoom!</strong><br/>"
+            } if(userRs == "100") {
+               carry = "1"
+            } else {
+               carry = "0"
+            }
          	let root = 1 / 310
             let readahead = 3.1
             let realCmod = userSs * 310
             // evil readahead / stepmania window accounting hack
-            let userCmod = capWideScale(((realCmod / (userSz / 3.1 / userSs)) / calcFifferSpeed(userSs)))
+            let userCmod = capWideScale(((realCmod / (userSz / 3.1 / userSs)) / calcFifferSpeed(userSs))) * (carry=="1" ? 1 : carry+"."+userRs)
          	if (checkBox = document.getElementById("toFiffer").checked == true){
          		userCmod = calcFifferSpeed((userSs+".5"))
          	}
          	if (checkBox = document.getElementById("toFiffer").checked == true) {
              	document.getElementById("cmodDiv").innerHTML = "<br/><hr/>Your FFR scroll speed is <strong>" + userCmod.toPrecision(7) + "</strong><hr/>"
          	} else {
-         		document.getElementById("cmodDiv").innerHTML = "<br/><hr/>Your StepMania CMOD is <strong>" + Math.floor(userCmod) + "</strong><br/><br/>If you need to convert it back to FFR, use this CMOD: <strong>" + Math.floor(realCmod) + "</strong><hr/>"
+         		document.getElementById("cmodDiv").innerHTML = warn+"<br/><hr/>Your StepMania CMOD is <strong>" + Math.floor(userCmod) + "</strong><br/><br/>If you need to convert it back to FFR, use this CMOD: <strong>" + Math.floor(realCmod) + "</strong><hr/>"
          	}
          }
          function toggleHide(elem){
@@ -38,6 +51,8 @@
          function removeSize(){
                toggleHide(document.getElementById("szLabel"))
                toggleHide(document.getElementById("sz"))
+               toggleHide(document.getElementById("rsLabel"))
+               toggleHide(document.getElementById("rs"))
          }
          window.addEventListener('load', function () {
          	var rand = Math.floor(Math.random() * 10)
@@ -79,7 +94,9 @@
          <label>Scroll speed: </label>
          <input type="text" name="bet" id="ss" size="8"><br/>
          <label id="szLabel">Window height: </label>
-         <input type="text" name="size" id="sz" size="8"><br/><hr/>
+         <input type="text" name="size" id="sz" size="6"><br/>
+         <label id="rsLabel">Zoom: </label>
+         <input type="text" name="recsz" id="rs" size="4"><br/><hr/>
          <input type="button" id="submit" value="Calculate" onclick="calculateCMOD()"><hr/>
          <br/>
       </form>
